@@ -39,7 +39,13 @@ export default {
           phoneNumber: '0600112233',
           gender: 'male'
         },
-      ]
+      ],
+      newMemberFirstname: '',
+      newMemberLastname: '',
+      newMemberAge: 25,
+      newMemberAddress: '',
+      newMemberPhoneNumber: '',
+      newMemberGender: '',
     }
   },
   mounted() {
@@ -56,14 +62,15 @@ export default {
         this.firstname = 'Patrick';
       }
     },
-    addAFamilyMember() {
+    addAFamilyMember(newMemberFirstname, newMemberLastname, newMemberAge, newMemberAddress, newMemberPhoneNumber, newMemberGender) {
       this.family.push(
         {
-          firstname: "Jojo",
-          lastname: "Bernard",
-          age: "25",
-          address: "fefzeiu",
-          phoneNumber: "crefkn"
+          firstname: newMemberFirstname,
+          lastname: newMemberLastname,
+          age: newMemberAge,
+          address: newMemberAddress,
+          phoneNumber: newMemberPhoneNumber,
+          gender: newMemberGender
         }
       )
     },
@@ -106,9 +113,25 @@ export default {
     <button v-if="buttonVisible" id="crazy-button" @click="changeFirstname">
       Changement de prénom
     </button>
-    <button id="add-family-member" @click="addAFamilyMember">
-      Ajouter un membre dans la famille
-    </button>
+    <form>
+      <div>
+        <div>
+          <input type="text" placeholder="Jojo" v-model="newMemberFirstname" />
+          <input type="text" placeholder="Bernard" v-model="newMemberLastname" />
+          <input type="number" min="10" v-model="newMemberAge" />
+          <input type="text" placeholder="79 Place de la Gare, 73000 Chambéry" v-model="newMemberAddress" />
+          <input type="tel" placeholder="0601020304" v-model="newMemberPhoneNumber" />
+          <select v-model="newMemberGender">
+            <option disabled value="">Choix</option>
+            <option value="male">Homme</option>
+            <option value="female">Femme</option>
+          </select>
+        </div>
+        <button type="button" id="add-family-member" @click="addAFamilyMember(newMemberFirstname, newMemberLastname, newMemberAge, newMemberAddress, newMemberPhoneNumber, newMemberGender)">
+          Ajouter un membre dans la famille
+        </button>
+      </div>
+    </form>
   </div>
 </template>
 
