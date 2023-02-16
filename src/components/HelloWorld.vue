@@ -10,22 +10,34 @@ export default {
         {
           firstname: 'Jojo',
           lastname: 'Bernard',
-          age: 25
+          age: 25,
+          address: '79 Place de la Gare, 73000 Chambéry',
+          phoneNumber: '0612345678',
+          gender: 'male'
         },
         {
           firstname: 'Marie',
           lastname: 'Blachère',
-          age: 29
+          age: 29,
+          address: '14 Avenue du Rhône, 74000 Annecy',
+          phoneNumber: '0601020304',
+          gender: 'female'
         },
         {
           firstname: 'Jean',
           lastname: 'Bernard',
-          age: 20
+          age: 20,
+          address: '1 Rue Claude Martin, 73000 Chambéry',
+          phoneNumber: '0687654321',
+          gender: 'male'
         },
         {
           firstname: 'Paul',
           lastname: 'Pogba',
-          age: 17
+          age: 17,
+          address: '75 avenue des Champs Élysées, 75000 Paris',
+          phoneNumber: '0600112233',
+          gender: 'male'
         },
       ]
     }
