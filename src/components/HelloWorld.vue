@@ -5,7 +5,8 @@ export default {
       firstname: 'Jean',
       age: 30,
       year: 2022,
-      buttonVisible: false
+      buttonVisible: false,
+      family: [Marie, Pierre, Lou, Peter, Margaux, Henry, Amadou]
     }
   },
   mounted() {
