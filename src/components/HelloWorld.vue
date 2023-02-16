@@ -1,7 +1,10 @@
 <script>
+// import mapboxgl from "mapbox-gl";
+
 export default {
   data() {
     return {
+      //accessToken: 'pk.eyJ1IjoiZGV2cmFwaCIsImEiOiJjbGU3NG83cXowMXl3M25uemIxcHB6Zmd1In0.Z_ZkjqQE1l26ErpbKdVdxg',
       firstname: 'Jean',
       age: 30,
       year: 2022,
@@ -53,6 +56,19 @@ export default {
       this.age++;
       this.year++;
     }, 3000);
+
+    /*mapboxgl.accessToken = this.accessToken;
+
+    new mapboxgl.Map({
+      container: "mapContainer",
+      style: "mapbox://styles/mapbox/streets-v11",
+      center: [103.811279, 1.345399],
+      zoom: 12,
+      maxBounds: [
+        [103.6, 1.1704753],
+        [104.1, 1.4754753],
+      ],
+    });*/
   },
   methods: {
     changeFirstname() {
@@ -92,7 +108,7 @@ export default {
 
       return this.family.sort( compare );;
     }
-  }
+  },
 }
 </script>
 
@@ -119,7 +135,9 @@ export default {
           <input type="text" placeholder="Jojo" v-model="newMemberFirstname" />
           <input type="text" placeholder="Bernard" v-model="newMemberLastname" />
           <input type="number" min="10" v-model="newMemberAge" />
-          <input type="text" placeholder="79 Place de la Gare, 73000 Chambéry" v-model="newMemberAddress" />
+          <mapbox-address-autofill access-token="pk.eyJ1IjoiZGV2cmFwaCIsImEiOiJjbGU3NG83cXowMXl3M25uemIxcHB6Zmd1In0.Z_ZkjqQE1l26ErpbKdVdxg">
+            <input type="text" name="address" autocomplete="shipping street-address" v-model="newMemberAddress" />
+          </mapbox-address-autofill>
           <input type="tel" placeholder="0601020304" v-model="newMemberPhoneNumber" />
           <select v-model="newMemberGender">
             <option disabled value="">Choix</option>
@@ -132,6 +150,7 @@ export default {
         </button>
       </div>
     </form>
+    <!--<div id="mapContainer" class="basemap"></div>-->
   </div>
 </template>
 
@@ -147,5 +166,19 @@ export default {
 
   #family {
     margin-bottom: 15px;
+  }
+
+  form {
+    margin-bottom: 20px;
+  }
+
+  #mapContainer {
+    width: 500px;
+    height: 500px;
+  }
+
+  .geocoder {
+    width: 300px;
+    height: 50px;
   }
 </style>
