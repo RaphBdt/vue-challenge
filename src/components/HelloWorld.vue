@@ -55,6 +55,17 @@ export default {
       } else {
         this.firstname = 'Patrick';
       }
+    },
+    addAFamilyMember() {
+      this.family.push(
+        {
+          firstname: "Jojo",
+          lastname: "Bernard",
+          age: "25",
+          address: "fefzeiu",
+          phoneNumber: "crefkn"
+        }
+      )
     }
   },
   computed: {
@@ -89,7 +100,7 @@ export default {
     <button v-if="buttonVisible" id="crazy-button" @click="changeFirstname">
       Changement de prénom
     </button>
-    <button id="add-family-member">
+    <button id="add-family-member" @click="addAFamilyMember">
       Ajouter un membre dans la famille
     </button>
   </div>
