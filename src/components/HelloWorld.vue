@@ -84,7 +84,7 @@ export default {
       <p>En {{ year }}, {{ firstname }} aura {{ age }} ans</p>
     </div>
     <div id="family">
-      <p v-for="person in familyByAge" :key="person.lastname">{{person.firstname}} {{person.lastname}} a {{person.age}} ans</p>
+      <p v-for="person in familyByAge" :key="person.lastname">{{person.firstname}} {{person.lastname}} a {{person.age}} ans. Adresse : {{person.address}} - Téléphone : Adresse : {{person.phoneNumber}} - Genre : {{person.gender}}</p>
     </div>
     <button v-if="buttonVisible" id="crazy-button" @click="changeFirstname">
       Changement de prénom
