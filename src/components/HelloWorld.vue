@@ -24,6 +24,8 @@ export default {
     <div id="age">
       <p>En {{ year }}, {{ firstname }} aura {{ age }} ans</p>
     </div>
+    <button id="crazy-button">
+    </button>
   </div>
 </template>
 
