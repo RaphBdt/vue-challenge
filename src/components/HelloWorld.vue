@@ -89,6 +89,9 @@ export default {
     <button v-if="buttonVisible" id="crazy-button" @click="changeFirstname">
       Changement de prénom
     </button>
+    <button id="add-family-member">
+      Ajouter un membre dans la famille
+    </button>
   </div>
 </template>
 
