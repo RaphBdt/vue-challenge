@@ -5,6 +5,11 @@ export default {
       firstname: "Jean",
       age: 30
     }
+  },
+  mounted() {
+    setInterval(() => {
+      this.age++
+    }, 3000);
   }
 }
 </script>
