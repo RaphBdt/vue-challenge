@@ -2,7 +2,7 @@
 export default {
   data() {
     return {
-      firstname: "Jean",
+      firstname: 'Jean',
       age: 30,
       year: 2022,
     }
@@ -15,7 +15,11 @@ export default {
   },
   methods: {
     changeFirstname() {
-      this.firstname = "Patrick";
+      if (this.firstname === 'Patrick') {
+        this.firstname = 'Jean';
+      } else {
+        this.firstname = 'Patrick';
+      }
     }
   }
 }
