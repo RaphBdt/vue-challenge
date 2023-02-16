@@ -66,6 +66,9 @@ export default {
           phoneNumber: "crefkn"
         }
       )
+    },
+    deleteAFamilyMember(positionOfMemberToDelete) {
+      this.family.splice(positionOfMemberToDelete, 1);
     }
   },
   computed: {
@@ -95,7 +98,10 @@ export default {
       <p>En {{ year }}, {{ firstname }} aura {{ age }} ans</p>
     </div>
     <div id="family">
-      <p v-for="person in familyByAge" :key="person.lastname">{{person.firstname}} {{person.lastname}} a {{person.age}} ans. Adresse : {{person.address}} - Téléphone : Adresse : {{person.phoneNumber}} - Genre : {{person.gender}}</p>
+      <div v-for="(person, i) in familyByAge" :key="person.lastname" class="family-member">
+        <p>{{person.firstname}} {{person.lastname}} a {{person.age}} ans. Adresse : {{person.address}} - Téléphone : Adresse : {{person.phoneNumber}} - Genre : {{person.gender}}</p>
+        <button @click="deleteAFamilyMember(i)">Supprimer</button>
+      </div>
     </div>
     <button v-if="buttonVisible" id="crazy-button" @click="changeFirstname">
       Changement de prénom
@@ -107,5 +113,16 @@ export default {
 </template>
 
 <style scoped>
+  .family-member {
+    display: flex;
+    align-items: center;
+  }
 
+  #age {
+    margin-bottom: 30px;
+  }
+
+  #family {
+    margin-bottom: 15px;
+  }
 </style>
