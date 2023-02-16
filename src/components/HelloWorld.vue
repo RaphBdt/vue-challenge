@@ -34,7 +34,7 @@ export default {
     <div id="age">
       <p>En {{ year }}, {{ firstname }} aura {{ age }} ans</p>
     </div>
-    <button id="crazy-button" @click="changeFirstname">
+    <button v-if="buttonVisible" id="crazy-button" @click="changeFirstname">
       Changement de prénom
     </button>
   </div>
