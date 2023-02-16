@@ -6,7 +6,7 @@ export default {
       age: 30,
       year: 2022,
       buttonVisible: false,
-      family: [Marie, Pierre, Lou, Peter, Margaux, Henry, Amadou]
+      family: ['Marie', 'Pierre', 'Lou', 'Peter', 'Margaux', 'Henry', 'Amadou']
     }
   },
   mounted() {
@@ -36,7 +36,7 @@ export default {
       <p>En {{ year }}, {{ firstname }} aura {{ age }} ans</p>
     </div>
     <div id="family">
-      
+      <p v-for="firstname in family">{{firstname}}</p>
     </div>
     <button v-if="buttonVisible" id="crazy-button" @click="changeFirstname">
       Changement de prénom
