@@ -8,23 +8,23 @@ export default {
       buttonVisible: false,
       family: [
         {
-          firstname: "Jojo",
-          lastname: "Bernard",
-          age: "25"
+          firstname: 'Jojo',
+          lastname: 'Bernard',
+          age: 25
         },
         {
-          firstname: "Marie",
-          lastname: "Blachère",
-          age: "29"
+          firstname: 'Marie',
+          lastname: 'Blachère',
+          age: 29
         },
         {
-          firstname: "Jean",
-          lastname: "Bernard",
-          age: "20"
+          firstname: 'Jean',
+          lastname: 'Bernard',
+          age: 20
         },
         {
-          firstname: "Paul",
-          lastname: "Pogba",
+          firstname: 'Paul',
+          lastname: 'Pogba',
           age: 17
         },
       ]
@@ -44,6 +44,21 @@ export default {
         this.firstname = 'Patrick';
       }
     }
+  },
+  computed: {
+    familyByAge() {
+      function compare( a, b ) {
+        if ( a.age < b.age ){
+          return -1;
+        }
+        if ( a.age > b.age ){
+          return 1;
+        }
+        return 0;
+      }
+
+      return this.family.sort( compare );;
+    }
   }
 }
 </script>
@@ -57,7 +72,7 @@ export default {
       <p>En {{ year }}, {{ firstname }} aura {{ age }} ans</p>
     </div>
     <div id="family">
-      <p v-for="person in family" :key="person.lastname">{{person.firstname}}</p>
+      <p v-for="person in familyByAge" :key="person.lastname">{{person.firstname}} {{person.lastname}} a {{person.age}} ans</p>
     </div>
     <button v-if="buttonVisible" id="crazy-button" @click="changeFirstname">
       Changement de prénom
