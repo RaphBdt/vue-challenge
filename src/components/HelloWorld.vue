@@ -12,6 +12,11 @@ export default {
       this.age++;
       this.year++;
     }, 3000);
+  },
+  methods: {
+    changeFirstname() {
+      this.firstname = "Patrick";
+    }
   }
 }
 </script>
@@ -24,7 +29,8 @@ export default {
     <div id="age">
       <p>En {{ year }}, {{ firstname }} aura {{ age }} ans</p>
     </div>
-    <button id="crazy-button">
+    <button id="crazy-button" @click="changeFirstname">
+      Changement de prénom
     </button>
   </div>
 </template>
