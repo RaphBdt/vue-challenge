@@ -5,7 +5,8 @@ import HelloWorld from './components/HelloWorld.vue'
 <script lang="ts">
 export default {
   mounted () {
-    document.body.classList.add('bg-black')
+    document.body.classList.add('bg-black');
+    document.body.classList.add('body-app');
   },
 }
 </script>
@@ -20,5 +21,11 @@ export default {
   .bg-black {
     background: #333333;
     color: #ffffff;
+  }
+
+  .body-app {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 </style>
