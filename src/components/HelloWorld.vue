@@ -2,7 +2,8 @@
 export default {
   data() {
     return {
-      firstname: "Jean"
+      firstname: "Jean",
+      age: 30
     }
   }
 }
@@ -14,7 +15,7 @@ export default {
       <p>Bonjour je m'appelle {{ firstname }}</p>
     </div>
     <div id="age">
-      <p>En 2022, {{ firstname }} aura 30 ans</p>
+      <p>En 2022, {{ firstname }} aura {{ age }} ans</p>
     </div>
   </div>
 </template>
