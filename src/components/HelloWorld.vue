@@ -1,10 +1,10 @@
 <script>
-// import mapboxgl from "mapbox-gl";
+import mapboxgl from "mapbox-gl";
 
 export default {
   data() {
     return {
-      //accessToken: 'pk.eyJ1IjoiZGV2cmFwaCIsImEiOiJjbGU3NG83cXowMXl3M25uemIxcHB6Zmd1In0.Z_ZkjqQE1l26ErpbKdVdxg',
+      accessToken: 'pk.eyJ1IjoiZGV2cmFwaCIsImEiOiJjbGU3NG83cXowMXl3M25uemIxcHB6Zmd1In0.Z_ZkjqQE1l26ErpbKdVdxg',
       firstname: 'Jean',
       age: 30,
       year: 2022,
@@ -16,7 +16,8 @@ export default {
           age: 25,
           address: '79 Place de la Gare, 73000 Chambéry',
           phoneNumber: '0612345678',
-          gender: 'male'
+          gender: 'male',
+          gpscoordinates: [5.91959, 45.57018],
         },
         {
           firstname: 'Marie',
@@ -24,7 +25,8 @@ export default {
           age: 29,
           address: '14 Avenue du Rhône, 74000 Annecy',
           phoneNumber: '0601020304',
-          gender: 'female'
+          gender: 'female',
+          gpscoordinates: [6.11686, 45.89977],
         },
         {
           firstname: 'Jean',
@@ -32,7 +34,8 @@ export default {
           age: 20,
           address: '1 Rue Claude Martin, 73000 Chambéry',
           phoneNumber: '0687654321',
-          gender: 'male'
+          gender: 'male',
+          gpscoordinates: [5.92358, 45.56694],
         },
         {
           firstname: 'Paul',
@@ -40,7 +43,8 @@ export default {
           age: 17,
           address: '75 avenue des Champs Élysées, 75000 Paris',
           phoneNumber: '0600112233',
-          gender: 'male'
+          gender: 'male',
+          gpscoordinates: [2.30529, 48.87053],
         },
       ],
       newMemberFirstname: '',
@@ -49,6 +53,7 @@ export default {
       newMemberAddress: '',
       newMemberPhoneNumber: '',
       newMemberGender: '',
+      map: null,
     }
   },
   mounted() {
@@ -57,18 +62,23 @@ export default {
       this.year++;
     }, 3000);
 
-    /*mapboxgl.accessToken = this.accessToken;
+    mapboxgl.accessToken = this.accessToken;
 
-    new mapboxgl.Map({
+    let map = new mapboxgl.Map({
       container: "mapContainer",
       style: "mapbox://styles/mapbox/streets-v11",
-      center: [103.811279, 1.345399],
-      zoom: 12,
-      maxBounds: [
-        [103.6, 1.1704753],
-        [104.1, 1.4754753],
-      ],
-    });*/
+      center: [6.1174001090181855, 45.89983841731178],
+      zoom: 4,
+    });
+
+    this.map = map;
+
+    this.family.forEach((member) => {
+      console.log(member.gpscoordinates);
+      new mapboxgl.Marker()
+        .setLngLat(member.gpscoordinates) // Set the marker's longitude and latitude
+        .addTo(map); // Add the marker to the map
+    })
   },
   methods: {
     changeFirstname() {
@@ -89,6 +99,32 @@ export default {
           gender: newMemberGender
         }
       )
+
+      mapboxgl.accessToken = this.accessToken;
+
+      const mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
+      mapboxClient.geocoding
+      .forwardGeocode({
+        query: newMemberAddress,
+        autocomplete: false,
+        limit: 1
+      })
+      .send()
+      .then((response) => {
+        if (
+          !response ||
+          !response.body ||
+          !response.body.features ||
+          !response.body.features.length
+        ) {
+          console.error('Invalid response:');
+          console.error(response);
+          return;
+        }
+        const feature = response.body.features[0];
+
+        new mapboxgl.Marker().setLngLat(feature.center).addTo(this.map);
+      });
     },
     deleteAFamilyMember(positionOfMemberToDelete) {
       this.family.splice(positionOfMemberToDelete, 1);
@@ -150,7 +186,7 @@ export default {
         </button>
       </div>
     </form>
-    <!--<div id="mapContainer" class="basemap"></div>-->
+    <div id="mapContainer" class="basemap"></div>
   </div>
 </template>
 
