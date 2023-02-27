@@ -74,9 +74,14 @@ export default {
     this.map = map;
 
     this.family.forEach((member) => {
-      console.log(member.gpscoordinates);
-      new mapboxgl.Marker()
+      new mapboxgl.Marker({ color: 'red' })
         .setLngLat(member.gpscoordinates) // Set the marker's longitude and latitude
+        .setPopup(
+          new mapboxgl.Popup({ offset: 25 }) // add popups
+            .setHTML(
+              `<h3 style="color: #333333;">${member.firstname}</h3><p style="color: #333333;">${member.age} ans</p>`
+            )
+        )
         .addTo(map); // Add the marker to the map
     })
   },
@@ -123,7 +128,12 @@ export default {
         }
         const feature = response.body.features[0];
 
-        new mapboxgl.Marker().setLngLat(feature.center).addTo(this.map);
+        new mapboxgl.Marker({ color: 'red' }).setLngLat(feature.center).setPopup(
+          new mapboxgl.Popup({ offset: 25 }) // add popups
+            .setHTML(
+              `<h3 style="color: #333333;">${newMemberFirstname}</h3><p style="color: #333333;">${newMemberAge} ans</p>`
+            )
+        ).addTo(this.map);
       });
     },
     deleteAFamilyMember(positionOfMemberToDelete) {
@@ -172,7 +182,7 @@ export default {
           <input type="text" placeholder="Bernard" v-model="newMemberLastname" />
           <input type="number" min="10" v-model="newMemberAge" />
           <mapbox-address-autofill access-token="pk.eyJ1IjoiZGV2cmFwaCIsImEiOiJjbGU3NG83cXowMXl3M25uemIxcHB6Zmd1In0.Z_ZkjqQE1l26ErpbKdVdxg">
-            <input type="text" name="address" autocomplete="shipping street-address" v-model="newMemberAddress" />
+            <input placeholder="24 Rue du Commandant Guilbaud, 75016 Paris" type="text" name="address" autocomplete="shipping street-address" v-model="newMemberAddress" />
           </mapbox-address-autofill>
           <input type="tel" placeholder="0601020304" v-model="newMemberPhoneNumber" />
           <select v-model="newMemberGender">
@@ -216,5 +226,18 @@ export default {
   .geocoder {
     width: 300px;
     height: 50px;
+  }
+
+  .mapboxgl-popup {
+    max-width: 200px;
+  }
+
+  .mapboxgl-popup-content {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  .mapboxgl-popup-content h3 {
+    color: #333333;
   }
 </style>
